@@ -1,8 +1,8 @@
+
 const { Schema, model } = require('mongoose');
 
-
 const UsuarioSchema = Schema({
-    nombre:{
+    nombre: {
         type: String,
         required: [true, 'El nombre es obligatorio']
     },
@@ -21,6 +21,7 @@ const UsuarioSchema = Schema({
     rol: {
         type: String,
         required: true,
+        default: 'USER_ROLE',
         emun: ['ADMIN_ROLE', 'USER_ROLE']
     },
     estado: {
@@ -33,8 +34,10 @@ const UsuarioSchema = Schema({
     },
 });
 
-UsuarioSchema.methods.toJSON = function () {
-    const { __v, password, _id, ...usuario } = this.toObject();
+
+
+UsuarioSchema.methods.toJSON = function() {
+    const { __v, password, _id, ...usuario  } = this.toObject();
     usuario.uid = _id;
     return usuario;
 }
